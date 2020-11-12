@@ -9,7 +9,7 @@ env:
 
 jobs:
   buildForSomePlatforms:
-    name: Build for ${{ matrix.targetPlatform }} on version ${{ matrix.unityVersion }}
+    name: hash ${{ matrix.hash }} - Build for ${{ matrix.targetPlatform }} on version ${{ matrix.unityVersion }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -41,14 +41,12 @@ jobs:
           lfs: true
       - uses: actions/cache@v1.1.0
         with:
-          path: ${{ matrix.projectPath }}/Library
-          key: Library-${{ matrix.projectPath }}-${{ matrix.targetPlatform }}
+          path: Library
+          key: Library-${{ matrix.targetPlatform }}
           restore-keys: |
-            Library-${{ matrix.projectPath }}-
             Library-
       - uses: webbertakken/unity-builder@v1.5
         with:
-          projectPath: ${{ matrix.projectPath }}
           unityVersion: ${{ matrix.unityVersion }}
           customImage: gableroux/unity3d@sha:${{ matrix.hash }}
           targetPlatform: ${{ matrix.targetPlatform }}
