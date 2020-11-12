@@ -48,7 +48,7 @@ jobs:
       - uses: webbertakken/unity-builder@v1.5
         with:
           unityVersion: ${{ matrix.unityVersion }}
-          customImage: gableroux/unity3d@sha:${{ matrix.hash }}
+          customImage: gableroux/unity3d@sha256:${{ matrix.hash }}
           targetPlatform: ${{ matrix.targetPlatform }}
       - uses: actions/upload-artifact@v1
         with:
