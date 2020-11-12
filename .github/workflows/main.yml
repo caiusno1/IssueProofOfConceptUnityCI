@@ -31,6 +31,12 @@ jobs:
           - XboxOne # Build a Xbox One Standalone.
           - tvOS # Build to Apple's tvOS platform.
           - Switch # Build a Nintendo Switch player.
+        hash:
+          - b44e4b18d3d0a3264bd2acfba9c250859100731148d9a5144b024241225e4a00
+          - 96252597770ec1d89892ab75fd1f8b5e9278c06e74edc978fddd7a927bf82210
+          - 9a7632f11d6781be94f1d8ffdf176dadd93af0aa3f23b9c14a8cd51c97cb4dab
+          - ca4ff9f155c1e1fbf1c2351fa3abc21583446581fdb777ce68e323bd59ab861d
+          - c5695e17a97a251e9990110ecb6738f9bf921e4c1b930cdaee0cd4ab7044141a
     steps:
       - uses: actions/checkout@v2
         with:
@@ -42,10 +48,11 @@ jobs:
           restore-keys: |
             Library-${{ matrix.projectPath }}-
             Library-
-      - uses: webbertakken/unity-builder@v2.0-alpha-2
+      - uses: webbertakken/unity-builder@v1.5
         with:
           projectPath: ${{ matrix.projectPath }}
           unityVersion: ${{ matrix.unityVersion }}
+          customImage: gableroux/unity3d@sha:${{ matrix.hash }}
           targetPlatform: ${{ matrix.targetPlatform }}
       - uses: actions/upload-artifact@v1
         with:
